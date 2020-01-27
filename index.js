@@ -18,6 +18,14 @@ app.get('/', function (req, res) {
     res.render('index', { products: productsdata });
 });
 
+app.get('/products', function (req, res) {
+    res.render('products', { products: productsdata });
+});
+
+app.get('/login', function (req, res) {
+   res.render('login'); 
+});
+
 app.get('/products/:product', function (req, res) {
     var find = {}
     for (let index = 0; index < productsdata.length; index++) {
