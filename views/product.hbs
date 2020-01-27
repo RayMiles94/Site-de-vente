@@ -37,30 +37,35 @@
   </div>
 </nav>
 <div id="mainpage" class="container" style="margin-top:30px;">
-    <div id="mainimage">
-          <figure class="figure">
-      <img id="cover_image" width="750" height="150" src="http://www.krakowpost.com/wp-content/uploads/2018/03/closed-shop-1024x683.jpg" class="figure-img img-fluid rounded" alt="Shop">
-      <figcaption class="figure_data">Site de vente en ligne</figcaption>
-    </figure>
-    </div>
-    
     <br/>
     <div class="row">
-      {{#each products}}
         <div class="col-sm-6">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/61WixzlVuXL._UX342_.jpg" alt="Card image cap">
-                    <h5 class="card-title">{{ref}}</h5>
-                    <div class="card-text">{{name}}</div>
-                    <p class="card-text">{{description}}</p>
-                    <div class="card-text">{{price}}</div>
-                    <a href="/products/{{ref}}" class="btn btn-primary">Buy it {{ref}}</a>
-                </div>
+            <div class="border border-primary" style="padding: 10px;">
+                <img class="produt-img" src="https://images-na.ssl-images-amazon.com/images/I/61WixzlVuXL._UX342_.jpg" alt="Card image cap">
+            <table class="product-table">
+                <tr>
+                    <td>Product Ref</td>
+                    <td><div class="product-ref"> {{data.ref}}</div></td>
+                </tr>
+                <tr>
+                    <td>Product Name</td>
+                    <td><div class="product-name">{{data.name}}</div></td>
+                </tr>
+                <tr>
+                    <td>Product Description</td>
+                    <td><div class="product-name">{{data.description}}</div></td>
+                </tr>
+                <tr>
+                    <td>Product Price</td>
+                    <td><div class="product-name">{{data.price}}</div></td>
+                </tr>
+            </table>
             </div>
+            
+            
         </div>
         <br/><br>
-        {{/each }}
+        
     </div>
 </div>
 </body>
