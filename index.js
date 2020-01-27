@@ -8,8 +8,8 @@ var productsdata = require('./src/data.js');
 
 app.disable('x-powered-by');
 
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, 'views'));
@@ -22,8 +22,24 @@ app.get('/products', function (req, res) {
     res.render('products', { products: productsdata });
 });
 
+
 app.get('/login', function (req, res) {
    res.render('login'); 
+});
+
+app.get('/signup', function (req, res) {
+    res.render('signup');
+});
+
+app.get('/getlogin', function (req, res, next) {
+    res.render('index', { products: productsdata });
+    var data = req.query;
+    next();
+});
+
+app.get('/signformsend', function (req, res, next) {
+   res.status(200).json(req.query);
+   next();
 });
 
 app.get('/products/:product', function (req, res) {
