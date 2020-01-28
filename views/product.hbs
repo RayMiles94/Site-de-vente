@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/asset/shop.ico">
     <link rel="stylesheet" type="text/css" href="/css/main.css" >
     <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <title>product | {{data.ref}}</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <img src="/asset/shop-icon.png" alt="vente" width="50" height="50">
   <a class="navbar-brand" href="/">Site de Vente</a>
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,14 +21,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home<img src="/asset/home-icon.png" alt="home" width="50" height="50"> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/products">Products</a>
+        <a class="nav-link" href="/products">Products <img src="/asset/sale-icon.png" alt="sale" width="50" height="50"></a>
       </li>
       {{#each account}}
       <li class="nav-item">
-        <a class="nav-link" href="{{link}}">{{string}}</a>
+        <a class="nav-link" href="{{link}}">{{{string}}}</a>
       </li>
       {{/each }}
     </ul>
@@ -67,5 +70,7 @@
         <br>
     </div>
 </div>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
 </body>
 </html>

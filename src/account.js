@@ -1,5 +1,5 @@
-const whenonline = [{ link:"/logout", string:"Logout" }];
-const whenoffline = [{ link:"/login", string:"Login" }, { link:"/signup", string:"Create Account" }];
+const whenonline = [{ link:"/logout", string:'Logout <img src="/asset/logout-icon.png" alt="home" width="50" height="50">' }];
+const whenoffline = [{ link:"/login", string:'Login <img src="/asset/login-icon.png" alt="home" width="50" height="50">' }, { link:"/signup", string:"Create Account <img src='/asset/account-icon.png' alt='login' width='50' height='50'>" }];
 
 module.exports = {
     whenonline : whenonline,

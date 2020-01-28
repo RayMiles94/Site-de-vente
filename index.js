@@ -5,6 +5,8 @@ var path = require('path')
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+var database = require('./src/database.js');
+
 var { whenonline, whenoffline } = require('./src/account.js');
 
 
@@ -26,10 +28,10 @@ app.set("views", path.join(__dirname, 'views'));
 app.get('/', function (req, res) {
     var online = req.session;
     if (online.account){
-        res.render('index',{ account : whenonline, products: productsdata } );
+        res.render('index',{ account : whenonline, products: database.fetch() } );
     }
     else {
-        res.render('index', { account : whenoffline, products: productsdata }); 
+        res.render('index', { account : whenoffline, products: database.fetch() }); 
     }
 });
 
