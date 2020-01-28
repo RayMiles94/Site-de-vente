@@ -23,12 +23,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/products">Products</a>
       </li>
+      {{#each account}}
       <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="{{link}}">{{string}}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/signup">Create Account</a>
-      </li>
+      {{/each }}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

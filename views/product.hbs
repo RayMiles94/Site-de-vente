@@ -23,12 +23,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/products">Products</a>
       </li>
+      {{#each account}}
       <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="{{link}}">{{string}}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/signup">Create Account</a>
-      </li>
+      {{/each }}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -40,7 +39,7 @@
     <br/>
     <div class="row">
         <div class="col-sm-6">
-            <div class="border border-primary" style="padding: 10px;">
+            <div class="border border-danger" style="padding: 10px;">
                 <img class="produt-img" src="https://images-na.ssl-images-amazon.com/images/I/61WixzlVuXL._UX342_.jpg" alt="Card image cap">
             <table class="product-table">
                 <tr>
@@ -59,13 +58,13 @@
                     <td class="product-header-table">Product Price</td>
                     <td><div class="product-name">{{data.price}}</div></td>
                 </tr>
-            </table>
+            </table><br/>
+            <a href="/" class="btn btn-primary">Back to main page</a>
+                
             </div>
-            
-            
         </div>
-        <br/><br>
-        
+        <br/>
+        <br>
     </div>
 </div>
 </body>
