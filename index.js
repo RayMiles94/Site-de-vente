@@ -43,7 +43,6 @@ app.get('/products', function (req, res) {
    else {
     database.fetch(whenoffline, res, 'products');
    }
-    
 });
 
 app.get('/products/:product', function (req, res) {
@@ -66,11 +65,14 @@ app.get('/signup', function (req, res) {
     res.render('signup');
 });
 
-app.get('/getlogin', function (req, res, next) {
+app.get('/getlogin', function (req, res) {
     var online = req.session;
-    res.render('index', { products: productsdata });
-    var data = req.query;
-    next();
+    if (online.account){
+        database.fetch(whenonline, res, 'index');
+    }
+    else {
+        database.fetch(whenoffline, res, 'index'); 
+    }
 });
 
 app.get('/logout', function (req, res) {
@@ -85,8 +87,12 @@ app.get('/signformsend', function (req, res) {
    secret.mail = req.query.email;
    secret.password = req.query.password;
    online.account =  secret;
-   //res.status(200).json(req.query);
-   res.render('index', { account : whenonline ,  products: productsdata});
+    if (online.account){
+        database.fetch(whenonline, res, 'index');
+    }
+    else {
+        database.fetch(whenoffline, res, 'index'); 
+    }
 });
 
 

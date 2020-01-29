@@ -69,10 +69,23 @@ function inseruser(user) {
    
   }
 
+  function createuser(user, res, req) {
+    db.put({
+      category :"user",
+      login : user.login,
+      mail : user.mail,
+      password : user.password
+    }, function(err, response) {
+      if (err) { return console.log(err); }
+    }).then(function (data) {
+      // todo : create user and render user page and make session
+    });
+  }
 
   module.exports = {
     fetch: displaydocs,
     insert : inseruser,
     findrecord: findrecord,
+    createuser: createuser,
   }
   
