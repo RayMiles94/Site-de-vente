@@ -44,6 +44,7 @@ function inseruser(user) {
       }
       return array;
     });
+    console.log(data);
     return data;
   }
 

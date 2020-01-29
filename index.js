@@ -95,6 +95,12 @@ app.get('/products/:product', function (req, res) {
     }
 });
 
+
+app.use(function (req, res, next) {
+   res.status(404);
+   res.render('404'); 
+});
+
 var server = http.createServer(app);
 const PORT = process.env.PORT || 3500;
 server.listen(PORT, function () {
