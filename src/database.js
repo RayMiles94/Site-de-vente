@@ -29,8 +29,7 @@ function inseruser(user) {
   });
 }
 
-  function displaydocs() {
-    var data = [];
+  function displaydocs(state, res, page) {
     db.allDocs({
       include_docs: true,
       attachments: false
@@ -42,15 +41,38 @@ function inseruser(user) {
       for (let index = 0; index < result.rows.length; index++) {
         array.push(result.rows[index].doc);  
       }
-      return array;
+      res.render(page,{ account : state, products: array } );
     });
-    console.log(data);
-    return data;
+   
+  }
+
+  function findrecord(page,state, x, res) {
+    db.allDocs({
+      include_docs: true,
+      attachments: false
+    }, function(err, response) {
+      if (err) { return console.log(err); }
+      
+    }).then(function (result) {
+      var array = [];
+      for (let index = 0; index < result.rows.length; index++) {
+        array.push(result.rows[index].doc);  
+      }
+      var find;
+      for (let index = 0; index < array.length; index++) {
+        if(x==array[index].ref){
+          find = array[index];
+        }
+      }
+      res.render(page, { data  : find, account : state} );
+    });
+   
   }
 
 
   module.exports = {
     fetch: displaydocs,
-    insert : inseruser
+    insert : inseruser,
+    findrecord: findrecord,
   }
   

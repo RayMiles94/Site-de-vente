@@ -28,22 +28,32 @@ app.set("views", path.join(__dirname, 'views'));
 app.get('/', function (req, res) {
     var online = req.session;
     if (online.account){
-        res.render('index',{ account : whenonline, products: database.fetch() } );
+        database.fetch(whenonline, res, 'index');
     }
     else {
-        res.render('index', { account : whenoffline, products: database.fetch() }); 
+        database.fetch(whenoffline, res, 'index'); 
     }
 });
 
 app.get('/products', function (req, res) {
     var online = req.session;
     if (online.account){
-        res.render('products', { account : whenonline, products: productsdata }); 
+        database.fetch(whenonline, res, 'products'); 
    }
    else {
-    res.render('products', { account : whenoffline, products: productsdata });
+    database.fetch(whenoffline, res, 'products');
    }
     
+});
+
+app.get('/products/:product', function (req, res) {
+    var online = req.session;
+    if (online.account){ 
+        database.findrecord('product',whenonline, req.params.product, res);
+    }
+    else {
+        database.findrecord('product', whenoffline, req.params.product, res);
+    }
 });
 
 app.get('/login', function (req, res) {
@@ -77,22 +87,6 @@ app.get('/signformsend', function (req, res) {
    online.account =  secret;
    //res.status(200).json(req.query);
    res.render('index', { account : whenonline ,  products: productsdata});
-});
-
-app.get('/products/:product', function (req, res) {
-    var online = req.session;
-    var find = {}
-    for (let index = 0; index < productsdata.length; index++) {
-        if (req.params.product == productsdata[index].ref){
-            find = productsdata[index];
-        } 
-    }
-    if (online.account){
-        res.render('product', { data  : find, account : whenonline}); 
-    }
-    else {
-        res.render('product', { data : find , account: whenoffline});
-    }
 });
 
 
