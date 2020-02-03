@@ -5,6 +5,7 @@ var path = require('path')
 const bodyParser = require('body-parser');
 const session = require('express-session');
 var bwip = require('bwip-js');
+var logger = require('./src/logger.js');
 
 var database = require('./src/database.js');
 
@@ -27,6 +28,7 @@ app.set('view engine', 'hbs');
 app.set("views", path.join(__dirname, 'views'));
 
 app.get('/', function (req, res) {
+    logger(req);
     var online = req.session;
     if (online.account){
         database.fetch(whenonline, res, 'index');
@@ -37,6 +39,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/products', function (req, res) {
+    logger(req);
     var online = req.session;
     if (online.account){
         database.fetch(whenonline, res, 'products'); 
@@ -47,6 +50,7 @@ app.get('/products', function (req, res) {
 });
 
 app.get('/products/:product', function (req, res) {
+    logger(req);
     var online = req.session;
     if (online.account){ 
         database.findrecord('product',whenonline, req.params.product, res);
@@ -57,16 +61,19 @@ app.get('/products/:product', function (req, res) {
 });
 
 app.get('/login', function (req, res) {
+    logger(req);
     var online = req.session;
     res.render('login')
 });
 
 app.get('/signup', function (req, res) {
+    logger(req);
     var online = req.session;  
     res.render('signup');
 });
 
 app.get('/getlogin', function (req, res) {
+    logger(req);
     var online = req.session;
     if (online.account){
         database.fetch(whenonline, res, 'index');
@@ -77,12 +84,14 @@ app.get('/getlogin', function (req, res) {
 });
 
 app.get('/logout', function (req, res) {
+   logger(req);
    var online = req.session;
    online.destroy();
    res.render('index', { account : whenoffline, products: productsdata }) 
 });
 
 app.get('/signformsend', function (req, res) {
+   logger(req);
    var online = req.session;
    secret.login = req.query.login;
    secret.mail = req.query.email;
