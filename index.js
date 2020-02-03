@@ -4,6 +4,7 @@ var http = require('http');
 var path = require('path')
 const bodyParser = require('body-parser');
 const session = require('express-session');
+var bwip = require('bwip-js');
 
 var database = require('./src/database.js');
 
@@ -93,6 +94,31 @@ app.get('/signformsend', function (req, res) {
     else {
         database.fetch(whenoffline, res, 'index'); 
     }
+});
+
+app.get('/barcode', function (req, res) {
+ 
+    bwip.toBuffer({
+        bcid:        'datamatrix',       // Barcode type
+        text:        req.query.text,    // Text to encode
+        scale:       3,               // 3x scaling factor
+        height:      10,              // Bar height, in millimeters
+        includetext: true,            // Show human-readable text
+        textxalign:  'center',        // Always good to set this
+    }, function (err, png) {
+        if (err) {
+            // `err` may be a string or Error object
+            console.log(err);
+            res.send('error')
+        } else {
+            // `png` is a Buffer
+            res.end(png, 'binary');
+            // png.length           : PNG file length
+            // png.readUInt32BE(16) : PNG image width
+            // png.readUInt32BE(20) : PNG image height
+        }
+    });
+    //res.setHeader('png');
 });
 
 
