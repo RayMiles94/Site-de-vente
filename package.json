@@ -1,6 +1,8 @@
 {
   "name": "miniproject-web",
   "version": "1.1.0",
+  "private": true,
+  "repository":"http+git:",
   "description": "mini project web site de vente en ligne",
   "main": "index.js",
   "scripts": {
