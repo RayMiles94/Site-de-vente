@@ -1,4 +1,4 @@
 /node_modules
+package-lock.json
 /site_de_vente
 /.git
-package-lock.json

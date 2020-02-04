@@ -108,26 +108,20 @@ app.get('/signformsend', function (req, res) {
 app.get('/barcode', function (req, res) {
  
     bwip.toBuffer({
-        bcid:        'datamatrix',       // Barcode type
-        text:        req.query.text,    // Text to encode
-        scale:       3,               // 3x scaling factor
-        height:      10,              // Bar height, in millimeters
-        includetext: true,            // Show human-readable text
-        textxalign:  'center',        // Always good to set this
+        bcid:         'datamatrix',       // Barcode type
+        text:         req.query.text,     // Text to encode
+        scale:        3,                  // 3x scaling factor
+        height:       10,                 // Bar height, in millimeters
+        includetext:  true,               // Show human-readable text
+        textxalign:   'center',           // Always good to set this
     }, function (err, png) {
         if (err) {
-            // `err` may be a string or Error object
             console.log(err);
             res.send('error')
         } else {
-            // `png` is a Buffer
-            res.end(png, 'binary');
-            // png.length           : PNG file length
-            // png.readUInt32BE(16) : PNG image width
-            // png.readUInt32BE(20) : PNG image height
+            res.end(png, 'binary'); 
         }
     });
-    //res.setHeader('png');
 });
 
 
@@ -137,7 +131,8 @@ app.use(function (req, res, next) {
 });
 
 var server = http.createServer(app);
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 4500;
+
 server.listen(PORT, function () {
-    console.log("Server work fine!!!");
+    console.log("Server work fine!!! in PORT:", PORT);
 })

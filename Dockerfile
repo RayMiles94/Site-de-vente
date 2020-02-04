@@ -1,8 +1,9 @@
-FROM node:alpine3.10
-WORKDIR /vente
-COPY package.json ./
+FROM node:carbon-stretch-slim
+WORKDIR /usr/src/vente
+COPY package*.json ./
 RUN npm install
+RUN npm audit fix
 COPY . .
 RUN npm run insert
-EXPOSE 3500
+EXPOSE 4500
 CMD [ "npm", "start" ]
