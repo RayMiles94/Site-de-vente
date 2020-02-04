@@ -1,6 +1,6 @@
 FROM node:alpine3.10
-WORKDIR /usr/src/sitedevente
-COPY package*.json ./
+WORKDIR /vente
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run insert
