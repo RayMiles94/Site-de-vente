@@ -43,7 +43,9 @@ function displaydocs(state, res, page) {
     }).then(function (result) {
         var array = [];
         for (let index = 0; index < result.rows.length; index++) {
-            array.push(result.rows[index].doc);
+            if ('name' in result.rows[index].doc) {
+                array.push(result.rows[index].doc);
+            }
         }
         res.render(page, {
             account: state,
