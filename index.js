@@ -105,8 +105,8 @@ app.get('/signformsend', function (req, res) {
 
 
 app.get('/usercheck', function (req, res) {
-    console.log(req.query);
-    res.json({messsage: 'done'});
+    logger(req);
+    database.checkuser(res, req.query.login);
 });
 
 
@@ -130,6 +130,7 @@ app.get('/barcode', function (req, res) {
 
 /* 404 not found route */
 app.use(function (req, res, next) {
+    logger(req);
     res.status(404);
     res.render('404');
 });

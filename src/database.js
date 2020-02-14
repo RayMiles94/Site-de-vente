@@ -16,20 +16,42 @@ function inseruser(user) {
     });
 }
 
-
-function finduser(user) {
-    db.createIndex({
-        index: {
-            fields: ['login']
+function checkuser(res, data){
+    db.allDocs({
+        include_docs: true,
+        attachments: false
+    }, function (err, response) {
+        if (err) {
+            return console.log(err);
         }
-    });
 
-    db.find({
-        selector: {
-            login: user
+    }).then(function (result) {
+        var array = [];
+        for (let index = 0; index < result.rows.length; index++) {
+            array.push(result.rows[index].doc);
+        }
+        var finduser = [];
+        var ok = false;
+        for (let index = 0; index < array.length; index++) {
+            if ('login' in array){
+                finduser.push(array[index]);
+            }
+        }
+        for (let index = 0; index < finduser.length; index++) {
+           if (finduser.login==data){
+               ok=true;
+           }
+        }
+        res.setHeader('Content-Type', 'application/json');
+        if (ok){
+            res.end(JSON.stringify({ reponse:'found' }));
+        }
+        else {
+            res.end(JSON.stringify({ reponse: 'not'}))
         }
     });
 }
+
 
 function displaydocs(state, res, page) {
     db.allDocs({
@@ -80,28 +102,26 @@ function findrecord(page, state, x, res) {
             account: state
         });
     });
-
 }
 
 function createuser(user, res, req) {
-    db.put({
-        category: "user",
-        login: user.login,
-        mail: user.mail,
-        password: user.password
+     db.put({
+        _id: index.toString()+"a",
+        login: 'login' + index.toString(),
+        mail: 'mail' + index.toString() + '@mail.com',
+        password: 'password'+index.toString()
     }, function (err, response) {
         if (err) {
             return console.log(err);
         }
-    }).then(function (data) {
-        res.render('done');
+        console.log('insert user data in databse is done!!!')
     });
 }
 
 module.exports = {
     fetch: displaydocs,
     insert: inseruser,
+    checkuser: checkuser,
     findrecord: findrecord,
     createuser: createuser,
-    finduser: finduser
 }

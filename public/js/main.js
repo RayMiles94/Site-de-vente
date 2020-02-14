@@ -1,9 +1,8 @@
 function createuser() {
     var login = document.getElementById('inputlogin').value;
-
     var email = document.getElementById('inputPassword').value;
     var confirm = document.getElementById('inputEmailConfirm').value;
-    $.ajax({
+    var mx = $.ajax({
         url: "/usercheck",
         method: "GET",
         dataType: 'json',
@@ -12,14 +11,21 @@ function createuser() {
             login: login
         },
         success: function (data) {
-            console.log(data);
+            return data.reponse;
         },
         error: function (data) {
             console.log(data);
+            window.alert(data);
         }
-    })
-    if (email == confirm) {
-        return true;
-    }
+    });
+    console.log(JSON.stringify(mx));
+    // if ((email == confirm) && (mx=="not")  ){
+    //      return true;
+    // }
+    // else {
+    //     return false;
+    // }
     return false;
 }
+
+
