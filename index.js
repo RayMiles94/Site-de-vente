@@ -111,7 +111,6 @@ app.get('/usercheck', function (req, res) {
 
 
 app.get('/barcode', function (req, res) {
-
     bwip.toBuffer({
         bcid: 'datamatrix', // Barcode type
         text: req.query.text, // Text to encode
@@ -129,7 +128,7 @@ app.get('/barcode', function (req, res) {
     });
 });
 
-
+/* 404 not found route */
 app.use(function (req, res, next) {
     res.status(404);
     res.render('404');
