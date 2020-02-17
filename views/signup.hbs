@@ -16,27 +16,26 @@
                     <div class="card card-signin my-5">
                         <div class="card-body">
                             <h5 class="card-title text-center">Sign Up</h5>
-                            <form class="form-signin" id="signform" onsubmit="return createuser();" action="/signformsend" method="GET">
-                                <div class="form-label-group">
-                                    <input name="login" type="login" id="inputlogin" class="form-control" placeholder="Login" required autofocus>
-                                    <label for="inputlogin">Login</label>
-                                </div>
-                                <div class="form-label-group">
-                                    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                                    <label for="inputEmail">Email address</label>
-                                </div>
-                                <div class="form-label-group">
-                                    <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
-                                    <label for="inputPassword">Password</label>
-                                </div>
-                                <div class="form-label-group">
-                                    <input name="confirmpassword" type="password" id="inputEmailConfirm" class="form-control" placeholder="Email address Confirm" required>
-                                    <label for="inputEmail">Email address Confirm</label>
-                                </div>
-                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create Account</button>
-                                <input id="backtomain" class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit">
-                                <i class="fab fa-facebook-f mr-2"></i>back to main page</input>
-                        </form>
+                            <div class="form-label-group">
+                                <input name="login" type="login" id="inputlogin" class="form-control" placeholder="Login" required autofocus>
+                                <label for="inputlogin">Login</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                <label for="inputEmail">Email address</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
+                                <label for="inputPassword">Password</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input name="confirmpassword" type="password" id="inputEmailConfirm" class="form-control" placeholder="Email address Confirm" required>
+                                <label for="inputEmail">Email address Confirm</label>
+                            </div>
+                            <button id="senddata" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create Account</button>
+                            <input id="backtomain" class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit">
+                            <i class="fab fa-facebook-f mr-2"></i>back to main page</input>
+                            <div id="error"></div>
                     </div>
                 </div>
             </div>

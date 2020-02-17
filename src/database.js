@@ -2,9 +2,20 @@ var PouchDB = require('pouchdb');
 PouchDB.plugin(require('pouchdb-find'));
 var db = new PouchDB('site_de_vente');
 
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 
+ 
 function inseruser(user) {
     db.put({
+        _id: makeid(5),
         login: user.login,
         mail: user.mail,
         password: user.password
@@ -30,18 +41,22 @@ function checkuser(res, data){
         for (let index = 0; index < result.rows.length; index++) {
             array.push(result.rows[index].doc);
         }
+
         var finduser = [];
         var ok = false;
         for (let index = 0; index < array.length; index++) {
-            if ('login' in array){
+            if ('login' in array[index]){
                 finduser.push(array[index]);
             }
         }
+
         for (let index = 0; index < finduser.length; index++) {
-           if (finduser.login==data){
-               ok=true;
-           }
+            if (finduser[index].login==data){
+                ok=true;
+            }
         }
+
+        
         res.setHeader('Content-Type', 'application/json');
         if (ok){
             res.end(JSON.stringify({ reponse:'found' }));

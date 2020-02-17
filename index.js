@@ -96,6 +96,12 @@ app.get('/signformsend', function (req, res) {
     secret.mail = req.query.email;
     secret.password = req.query.password;
     online.account = secret;
+    const user = {
+        login : secret.login,
+        mail : secret.mail,
+        password:  secret.password
+    }
+    database.insert(user);
     if (online.account) {
         database.fetch(whenonline, res, 'index');
     } else {
@@ -109,6 +115,10 @@ app.get('/usercheck', function (req, res) {
     database.checkuser(res, req.query.login);
 });
 
+app.get('/userchecklogin', function (req, res) {
+    logger(req);
+    database.checkuser(res, req.query.login);
+});
 
 app.get('/barcode', function (req, res) {
     bwip.toBuffer({

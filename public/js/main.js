@@ -1,7 +1,22 @@
-function createuser() {
+serialize = function(obj) {
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&");
+  }
+
+$('#senddata').click(function () {
     var login = document.getElementById('inputlogin').value;
-    var email = document.getElementById('inputPassword').value;
+    var email = document.getElementById('inputEmail').value;
     var confirm = document.getElementById('inputEmailConfirm').value;
+    var password = document.getElementById('inputPassword').value;
+    const query = {
+        login : login,
+        email : email,
+        password : password
+    }
     var mx = $.ajax({
         url: "/usercheck",
         method: "GET",
@@ -11,21 +26,39 @@ function createuser() {
             login: login
         },
         success: function (data) {
-            return data.reponse;
+            if( (password==confirm) && (data.reponse=="not") ){
+                window.location = "/signformsend?"+serialize(query);
+            }
+            else {
+                alert("This User is already exist");
+                document.getElementById('error').innerHTML = "This User is already exist";
+            }
         },
         error: function (data) {
             console.log(data);
             window.alert(data);
         }
     });
-    console.log(JSON.stringify(mx));
-    // if ((email == confirm) && (mx=="not")  ){
-    //      return true;
-    // }
-    // else {
-    //     return false;
-    // }
-    return false;
-}
+    return true;
+});
 
+$("#submitlogin").click(function () {
+   var login =  document.getElementById('loginbinputEmail').value;
+   var mp = document.getElementById('logininputPassword').value;
+   const user = {
+       login : login,
+       password: mp
+   };
+   $.ajax({
+    url: "/userchecklogin",
+    method: "GET",
+    dataType: 'json',
+    data: user,
+    success : function(data){
 
+    },
+    error: function (data) {
+        
+    }
+   })
+});
