@@ -1,5 +1,9 @@
 const whenonline = [
     { 
+        link:"/myaccount", 
+        string:"My Account<img src='/asset/login-icon.png' alt='login' width='50' height='50'>" 
+    },
+    { 
         link:"/logout", 
         string:'Logout <img src="/asset/logout-icon.png" alt="home" width="50" height="50">' 
     }

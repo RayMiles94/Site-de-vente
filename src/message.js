@@ -1,1 +1,1 @@
-console.log('test message');
+module.exports = console.log('test message');

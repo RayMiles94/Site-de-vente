@@ -13,6 +13,48 @@ function makeid(length) {
  }
 
  
+function checkuserlogin(res, data) {
+    db.allDocs({
+        include_docs: true,
+        attachments: false
+    }, function (err, response) {
+        if (err) {
+            return console.log(err);
+        }
+
+    }).then(function (result) {
+        var array = [];
+        for (let index = 0; index < result.rows.length; index++) {
+            array.push(result.rows[index].doc);
+        }
+
+        var finduser = [];
+        var ok = false;
+        for (let index = 0; index < array.length; index++) {
+            if ('login' in array[index]){
+                finduser.push(array[index]);
+            }
+        }
+        var userdata = {};
+        console.log('started for looking')
+        for (let index = 0; index < finduser.length; index++) {
+            if ((finduser[index].mail==data.login) && (finduser[index].password==data.password)){
+                ok=true;
+                userdata = finduser[index];
+                console.log('found');
+            }
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        if (ok){
+            res.end(JSON.stringify({ reponse:'found', data: userdata }));
+        }
+        else {
+            res.end(JSON.stringify({ reponse: 'not'}))
+        }
+    });
+} 
+
 function inseruser(user) {
     db.put({
         _id: makeid(5),
@@ -55,8 +97,7 @@ function checkuser(res, data){
                 ok=true;
             }
         }
-
-        
+   
         res.setHeader('Content-Type', 'application/json');
         if (ok){
             res.end(JSON.stringify({ reponse:'found' }));
@@ -134,6 +175,7 @@ function createuser(user, res, req) {
 }
 
 module.exports = {
+    checkuserlogin: checkuserlogin,
     fetch: displaydocs,
     insert: inseruser,
     checkuser: checkuser,

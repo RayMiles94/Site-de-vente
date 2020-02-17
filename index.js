@@ -117,7 +117,37 @@ app.get('/usercheck', function (req, res) {
 
 app.get('/userchecklogin', function (req, res) {
     logger(req);
-    database.checkuser(res, req.query.login);
+    database.checkuserlogin(res, req.query);
+});
+
+app.get('/loginsucc', function (req, res) {
+    logger(req);
+    var online = req.session;
+    secret.login = req.query.login;
+    secret.mail = req.query.email;
+    secret.password = req.query.password;
+    online.account = secret;
+    const user = {
+        login : secret.login,
+        mail : secret.mail,
+        password:  secret.password
+    }
+    database.insert(user);
+    if (online.account) {
+        database.fetch(whenonline, res, 'index');
+    } else {
+        database.fetch(whenoffline, res, 'index');
+    }
+});
+
+app.get('/myaccount', function (req, res) {
+    var online = req.session;
+    console.log(online.account);
+    if(online.account){
+        res.render('myaccount', {  account: whenonline, user: online.account } )
+    } else {
+        res.render('404');
+    }
 });
 
 app.get('/barcode', function (req, res) {

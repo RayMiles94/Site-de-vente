@@ -27,7 +27,7 @@ $('#senddata').click(function () {
         },
         success: function (data) {
             if( (password==confirm) && (data.reponse=="not") ){
-                window.location = "/signformsend?"+serialize(query);
+                window.location = "/loginsucc?"+serialize(query);
             }
             else {
                 alert("This User is already exist");
@@ -55,10 +55,16 @@ $("#submitlogin").click(function () {
     dataType: 'json',
     data: user,
     success : function(data){
-
+        if(data.reponse=="found"){
+            window.location = "/signformsend?"+serialize(data.data);
+        }
+        else {
+            alert("This User is Not exist");
+        }
     },
     error: function (data) {
-        
+        console.log(data);
+        window.alert(data);
     }
    })
 });
