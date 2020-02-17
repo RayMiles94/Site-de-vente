@@ -1,7 +1,7 @@
 FROM node:carbon-stretch-slim
 WORKDIR /usr/src/vente
 COPY package*.json ./
-RUN npm install
+RUN npm install  -no-cache
 RUN npm audit fix
 COPY . .
 RUN npm run insert
