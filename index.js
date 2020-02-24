@@ -145,6 +145,7 @@ app.get('/loginsucc', function (req, res) {
 });
 
 app.get('/myaccount', function (req, res) {
+    logger(req);
     var online = req.session;
     console.log(online.account);
     if(online.account){
@@ -155,6 +156,7 @@ app.get('/myaccount', function (req, res) {
 });
 
 app.get('/barcode', function (req, res) {
+    logger(req);
     bwip.toBuffer({
         bcid: 'datamatrix', // Barcode type
         text: req.query.text, // Text to encode
@@ -170,6 +172,10 @@ app.get('/barcode', function (req, res) {
             res.end(png, 'binary');
         }
     });
+});
+
+app.get('/insertcontact', function (req, res) {
+   database.insertcontact(res, req); 
 });
 
 /* 404 not found route */

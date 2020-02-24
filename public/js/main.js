@@ -67,3 +67,31 @@ $("#submitlogin").click(function () {
         }
     })
 });
+
+$('#sendcontcat').click(function () {
+    var emaildata = document.getElementById('emaildata').value;
+    var subjectdata = document.getElementById('subjectdata').value;
+    const data = {
+        emaildata: emaildata,
+        subjectdata: subjectdata
+    };
+    $.ajax({
+        url :'/insertcontact',
+        method:'GET',
+        dataType: 'json',
+        data:data,
+        success :  function (data) {
+            if (data.reponse == "save") {
+              window.alert('Contact Message Send it succfuly');
+              location.reload();
+            } else {
+                window.alert('Contact Message Failed');
+                location.reload();
+            }
+        },
+        error: function (data) {
+            console.log(data);
+            window.alert(data);
+        }
+    })
+});

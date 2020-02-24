@@ -174,6 +174,24 @@ function createuser(user, res, req) {
     });
 }
 
+function insertcontact(res, req) {
+    var data = {
+        mail: req.query.emaildata,
+        subject: req.query.subjectdata
+    };
+    db.put({
+        _id: makeid(10),
+        emaildata: data.mail,
+        subjectdata: data.subject,
+    }, function (err, response) {
+        if (err) {
+            res.end(JSON.stringify({ reponse:'not save' }));
+            return console.log(err);
+        }
+        res.end(JSON.stringify({ reponse:'save' }));
+    });
+}
+
 module.exports = {
     checkuserlogin: checkuserlogin,
     fetch: displaydocs,
@@ -181,4 +199,5 @@ module.exports = {
     checkuser: checkuser,
     findrecord: findrecord,
     createuser: createuser,
+    insertcontact:insertcontact
 }

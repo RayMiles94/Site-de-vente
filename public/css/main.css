@@ -45,3 +45,10 @@ img .cover_image {
     background-color: lightgray;
 
 }
+
+.contact {
+    text-align: center;
+    font-size: large;
+    color: aliceblue;
+    margin: auto;
+}
