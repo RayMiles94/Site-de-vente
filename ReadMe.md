@@ -3,12 +3,12 @@ write in javascript front end and back end:
 front end : html , css (bootstrap ) , js (jquery)
 back end : express js ( NodeJS )
 
-# to start site de vente
+# the steps need for started project  site de vente is 
 1) first clone project<br/>
 ```bash
 git clone https://github.com/RayMiles94/Site-de-vente.git
 ```
-1) second enter directory<br/>
+2) second enter directory<br/>
 ```bash
 cd Site-de-vente
 ```
