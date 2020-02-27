@@ -1,7 +1,11 @@
+/**
+ * logger functio.
+ * @param {string} req The first number.
+ */
 function logger(req) {
-    var today = new Date();
-    var now = today.toLocaleString();
-    console.log("SERVER LOG => "+ now + " : Route "+req._parsedOriginalUrl.path);
+  const today = new Date();
+  const now = today.toLocaleString();
+  console.log('SERVER LOG => '+ now + ' : Route '+req._parsedOriginalUrl.path);
 }
 
 module.exports = logger;

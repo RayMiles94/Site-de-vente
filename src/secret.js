@@ -1,5 +1,5 @@
-module.exports = { 
-    login :"no login",
-    mail:"no email",
-    password:"no password"
-}
+module.exports = {
+  login: 'no login',
+  mail: 'no email',
+  password: 'no password',
+};
