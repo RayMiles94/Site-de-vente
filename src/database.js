@@ -190,6 +190,25 @@ function insertcontact(res, req) {
   });
 }
 
+function saveproductdb(req, res) {
+  const data = {
+    productname: req.query.productname,
+    price: req.query.price,
+  };
+  db.put({
+    _id: makeid(10),
+    ref: makeid(10),
+    name: 'Product ' + 'N' + data.productname.toString(),
+    price: data.price + '$',
+  }, function(err, response) {
+    if (err) {
+      res.end(JSON.stringify({reponse: 'not save'}));
+      return console.log(err);
+    }
+    res.end(JSON.stringify({reponse: 'save'}));
+  });
+}
+
 module.exports = {
   checkuserlogin: checkuserlogin,
   fetch: displaydocs,
@@ -198,4 +217,5 @@ module.exports = {
   findrecord: findrecord,
   createuser: createuser,
   insertcontact: insertcontact,
+  saveproductdb: saveproductdb,
 };

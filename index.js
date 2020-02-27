@@ -173,6 +173,21 @@ app.get('/insertcontact', function(req, res) {
   database.insertcontact(res, req);
 });
 
+app.get('/addproduct', function(req, res) {
+  logger(req);
+  const online = req.session;
+  if (online.account) {
+    res.render('addproduct', {account: whenonline});
+  } else {
+    res.render('addproduct', {account: whenoffline});
+  }
+});
+
+app.get('/saveproductindb', function(req, res) {
+  logger(req);
+  database.saveproductdb(req, res);
+});
+
 /* 404 not found route */
 app.use(function(req, res, next) {
   logger(req);

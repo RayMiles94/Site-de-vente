@@ -97,3 +97,41 @@ $('#sendcontcat').click(function() {
     },
   });
 });
+
+
+$('#saveproduct').click(function () {
+  const productname = document.getElementById('productname').value;
+  var price = document.getElementById('price').value;
+  if (productname.length != undefined ){
+    if (price != undefined){
+      $.ajax({
+        url: '/saveproductindb',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+          productname : productname,
+          price : price
+        },
+        success: function(data) {
+          if (data.reponse == 'save') {
+            window.alert('product saved succfully');
+            location.reload();
+          } else {
+            window.alert('Contact Message not saved');
+            location.reload();
+          }
+        },
+        error: function(data) {
+          console.log(data);
+          window.alert(data);
+        },
+      });
+    }
+    else {
+      window.alert('you need to add price');
+    }
+  }
+  else {
+    window.alert('you need to add product name first');
+  }
+});
